@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# DARK
+export VIM_THEME='dark'
+

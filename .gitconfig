@@ -1,0 +1,26 @@
+[core]
+	editor = vim
+	fileMode = false
+	excludesfile = /home/tung/.config/git/git-templates/gitignore_global
+[init]
+	templatedir = /home/tung/.config/git/git-templates
+[commit]
+	template = /home/tung/.config/git/git-templates/git_commit_msg.txt
+[alias]
+	co = checkout
+	f = fetch
+	d = diff
+	l = log
+	a = add
+	c = commit
+	br = branch
+	cp = cherry-pick
+	cl = clone
+	st = status
+	sh = stash
+	pl = pull
+	ps = push
+	unstage = reset HEAD
+	re = rebase
+	up = "!git remote update -p; git merge --ff-only @{u}"
+

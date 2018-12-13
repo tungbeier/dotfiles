@@ -1,0 +1,26 @@
+! Use rofi -dump-xresources to read out the possible settings
+!rofi.theme:             solarized
+rofi.font:              DejavuSansMono 17
+rofi.lines:             15
+rofi.separator-style:   dash
+rofi.hide-scrollbar:    true
+rofi.eh:                1
+rofi.columns:           1
+rofi.show-icons:        false
+rofi.terminal:          termite
+rofi.matching:          fuzzy
+rofi.display-window:     :
+rofi.display-windowcd:   :
+rofi.display-run:        :
+rofi.display-ssh:        :
+rofi.display-drun:       :
+rofi.display-combi:      :
+rofi.display-keys:       :
+
+!                   background  border      separator
+rofi.color-window:  #073642,    #073642,    #268bd2
+
+! State             bg       fg       bgalt    hlbg     hlfg
+rofi.color-normal:  #073642, #93a1a1, #073642, #b58900, #073642
+rofi.color-urgent:  #dc322f, #073642, #dc322f, #d33682, #073642
+rofi.color-active:  #268bd2, #073642, #2aa198, #268bd2, #073642

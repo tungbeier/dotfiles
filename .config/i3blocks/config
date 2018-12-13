@@ -1,0 +1,84 @@
+# i3blocks config file
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=5
+markup=pango
+separator=false
+# '' ''
+
+[volume]
+command=i3volume
+interval=once
+signal=10
+
+#[separator]
+#full_text=Separator
+#command=echo 
+#interval=once
+#
+#[brightness]
+#full_text=brightness
+#command=echo ""
+#interval=once
+#signal=12
+
+[separator]
+full_text=Separator
+command=echo 
+interval=once
+
+[iface]
+label=
+instance=enp0s31f6
+color=#00FF00
+interval=15
+
+[wifi]
+label=
+instance=wlp3s0
+interval=15
+
+[separator]
+full_text=Separator
+command=echo 
+interval=once
+
+[disk]
+label=
+instance=/
+color=grey
+interval=3600
+
+[separator]
+full_text=Separator
+command=echo 
+interval=once
+
+[temperature]
+label=
+interval=10
+
+[separator]
+full_text=Separator
+command=echo 
+#command=echo "<span fgcolor='black'></span>"
+interval=once
+
+[battery]
+command=i3battery
+interval=30
+
+[separator]
+full_text=Separator
+command=echo 
+interval=once
+
+[time]
+command=i3datetime
+interval=60
+
+# " %essid   %quality  %bitrate  %ip"
+# " %usage"
+# "%1min"
+#''''
+#''''
+

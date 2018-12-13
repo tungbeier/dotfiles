@@ -1,0 +1,49 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs #
+########
+*.log
+
+# Folders #
+###########
+tmp/
+local-xslt/
+101/
+dev-tmp/
+dev-temp/
+
+# CTags and CScope #
+####################
+tags
+cscope.out
+cscope/
+
+# Intellij #
+############
+.idea/
+*.iml
+
+# Eclipse #
+###########
+.classpath
+.project
+.settings/
+bin/
