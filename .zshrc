@@ -6,13 +6,15 @@
 #
 DEFAULT_USER=`whoami` # Add default user to hide user@host in prompt
 
+GOPATH=$HOME/go
+GOBIN=$GOPATH/bin
 M2_HOME=/opt/maven
 PATH=$PATH:$HOME/bin:/usr/bin:/usr/local/bin:$M2_HOME/bin:$GOBIN
+export GOBIN
+export GOPATH
 export M2_HOME
 export PATH
 
-export GOPATH=$HOME/go
-export GOBIN=$GOPATH/bin
 
 export TERM="xterm-256color" # 256 color schemes support
 
@@ -26,12 +28,23 @@ export ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME=""
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor root line)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+
+RANGER_LOAD_DEFAULT_RC=FALSE
+
+GIT_AUTHOR_NAME="tung beier"
+GIT_AUTHOR_EMAIL="beier.tung@web.de"
+GIT_COMMITTER_NAME="tung beier"
+GIT_COMMITTER_EMAIL="beier.tung@web.de"
+
 HISTSIZE=10000000
 SAVEHIST=10000000
 HIST_STAMPS="yyyy-mm-dd"
 HISTFILE=~/.zsh_history
 
-plugins=(docker gitfast git-extras encode64 golang wd zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(gitfast git-extras golang wd zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
@@ -61,9 +74,6 @@ setopt share_history
 # Only show completion menu, do not select the first entry
 setopt auto_menu
 unsetopt menu_complete
-
-# Check before doing a 'rm *'
-setopt rm_star_wait
 
 if [ -d $HOME/.config/alias ]; then
     for file in $HOME/.config/alias/*
