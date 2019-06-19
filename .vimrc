@@ -2,24 +2,31 @@
 "     __   _(_)_ __ ___  _ __ ___
 "     \ \ / / | '_ ` _ \| '__/ __|
 "      \ V /| | | | | | | | | (__
-"       \_/ |_|_| |_| |_|_|  \___|
+"     (_)_/ |_|_| |_| |_|_|  \___|
 "
 " =============================================================================
-" => Vim Plug
+" =>Plugins manager
 " =============================================================================
 call plug#begin('~/.vim/plugged')
 
-Plug 'bronson/vim-trailing-whitespace'
-Plug 'scrooloose/nerdtree'
-Plug 'valloric/youcompleteme'
-Plug 'sheerun/vim-polyglot'
-Plug 'fatih/vim-go'
-Plug 'udalov/kotlin-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'sheerun/vim-polyglot'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'valloric/youcompleteme'
+Plug 'fatih/vim-go'
+Plug 'udalov/kotlin-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'yggdroot/indentline'
+" Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-surround'
 
 call plug#end()
 
+filetype on
 " =============================================================================
 " =>Plugins configuration
 " =============================================================================
@@ -29,8 +36,10 @@ call plug#end()
 " Leader
 let mapleader = ","
 
-" SimpylFold
-" let g:SimpylFold_docstring_preview=1
+" YouCompleteMe
+let g:syntastic_java_checkers = []
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
 
 " Vim-Go
 let g:go_fold_enable = []
@@ -49,22 +58,34 @@ let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
-" You Complete Me
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+" NERDTree
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " Airline
-let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'onedark'
+
+let g:onedark_termcolors=16
+
+" The silver searcher
+if executable('ag')
+    " Use ag over vim :grep
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
+
+    " Use ag in CtrlP
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+endif
 " =============================================================================
 " =>General
-"" =============================================================================
+" =============================================================================
 " Set to auto read when a file is changed from the outside
 set autoread
 
 " Set how many lines of history Vim has to remember
-set history=750
+set history=1000
 
 " =============================================================================
 " => Vim user interface
@@ -111,10 +132,8 @@ set tm=500
 " => Colors and Fonts
 " =============================================================================
 " Enable syntax highlighting
-syntax enable " allow customizing
-
-"let base16colorspace=256
-"colorscheme base16-default-dark
+syntax on
+colorscheme onedark
 
 " Set encoding
 set encoding=utf-8
@@ -125,7 +144,7 @@ set ffs=unix,dos,mac
 " =============================================================================
 " => Backups
 " =============================================================================
-" Turn off backup
+" Deactivate backup
 set nobackup
 set nowritebackup
 set noswapfile
@@ -144,7 +163,8 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-au BufNewFile,BufRead *.c, *.cpp, *.h, *.css, *.html, *.sql, *.js
+au FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+au BufNewFile,BufRead *.c, *.cpp, *.h, *.css, *.html, *.sql
     \ set tabstop=2
     \ set softtabstop=2
     \ set shiftwidth=2
@@ -235,7 +255,8 @@ set numberwidth=5
 set splitbelow
 set splitright
 
-command! -nargs=0 W w !sudo tee % > /dev/null
+"cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+command W w !sudo tee "%" > /dev/null
 
 " Fzy
 function! FzyCommand(choice_command, vim_command)
@@ -250,6 +271,6 @@ function! FzyCommand(choice_command, vim_command)
   endif
 endfunction
 
-nnoremap <leader>e :call FzyCommand("find . -type f", ":e")<cr>
-nnoremap <leader>v :call FzyCommand("find . -type f", ":vs")<cr>
-nnoremap <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
+nnoremap <leader>e :call FzyCommand("ag -gS --silent .", ":e")<cr>
+nnoremap <leader>v :call FzyCommand("ag -gS --silent .", ":vs")<cr>
+nnoremap <leader>s :call FzyCommand("ag -gS --silent .", ":sp")<cr>
