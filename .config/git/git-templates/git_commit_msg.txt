@@ -1,13 +1,13 @@
 
-##################################################
-
-################################################################################
 # 1) If applied, this commit will...
+#-------------------------------------------------
 # 2) Explain WHY / WHAT and NOT HOW this change is being made
-# 3) Provide links to any other relevant tickets and other reources
 
+# 3) Provide links to any other relevant tickets and other reources
+#-------------------------------------------------------------------------------
 # Reminder:
-#   1. Limit the subject line to 50 characters
-#   2. Do not end the subject line with a period
-#   3. Use the imperative mood in the subject line
-#   4. Wrap the body at 72 characters
+#   * Limit the subject line to 50 characters
+#   * Do not end the subject line with a period
+#   * Use the imperative mood in the subject line
+#   * Wrap the body at around 72 characters
+#-------------------------------------------------------------------------------
