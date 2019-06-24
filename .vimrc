@@ -163,12 +163,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-au FileType cpp setlocal shiftwidth=2 tabstop=2 softtabstop=2
-au BufNewFile,BufRead *.c, *.cpp, *.h, *.css, *.html, *.sql
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
-
+au FileType h,c,cpp,sh,css,html,sql setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 set lbr " Linebreak
 set tw=140 " text width
