@@ -1,9 +1,10 @@
-#      _ _____
-#     (_)___ /_      ___ __ ___
-#     | | |_ \ \ /\ / / '_ ` _ \ 
-#     | |___) \ V  V /| | | | | |
-#     |_|____/ \_/\_/ |_| |_| |_|
-
+#      _ _____                    __ _                       _   _
+#     (_)___ /    ___ ___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __
+#     | | |_ \   / __/ _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \ 
+#     | |___) | | (_| (_) | | | |  _| | (_| | |_| | | | (_| | |_| | (_) | | | |
+#     |_|____/   \___\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|
+#                                      |___/
+#-------------------------------------------------------------------------------
 set $mod Mod4
 
 new_window 1pixel
@@ -15,8 +16,9 @@ focus_on_window_activation urgent
 
 # Gaps
 for_window [class=".*"] border pixel 1
-gaps inner 10
-gaps outer -10
+set $gapSize 15
+gaps inner $gapSize
+gaps outer -$gapSize
 
 # Font
 set $font "System San Francisco Display Regular"
@@ -222,4 +224,3 @@ exec xautolock -detectsleep -time 5 -locker $lock -notify 30 -notifier "Lock scr
 exec --no-startup-id compton -CGb
 
 exec_always --no-startup-id feh --bg-scale "$HOME/.config/wallpapers/bg.jpg"
-
