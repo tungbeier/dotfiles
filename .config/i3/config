@@ -13,6 +13,11 @@ hide_edge_borders smart
 popup_during_fullscreen smart
 focus_on_window_activation urgent
 
+# Gaps
+for_window [class=".*"] border pixel 1
+gaps inner 10
+gaps outer -10
+
 # Font
 set $font "System San Francisco Display Regular"
 font pango:$font 12
