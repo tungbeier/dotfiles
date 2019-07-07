@@ -120,7 +120,7 @@ assign [class="VirtualBox Machine"] $workspace_5
 assign [class="qutebrowser"] $workspace_3
 assign [class="DBeaver"] $workspace_1
 
-assign [class="Termite"] $workspace_0
+assign [class="St"] $workspace_0
 assign [class="jetbrains-idea"] $workspace_2
 assign [class="Chromium"] $workspace_4
 assign [class="Code"] $workspace_6
