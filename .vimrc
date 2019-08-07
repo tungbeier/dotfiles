@@ -31,7 +31,7 @@ filetype on
 " =>Plugins configuration
 " =============================================================================
 " Disable language support
-" let g:polyglot_disabled = ['css']
+let g:polyglot_disabled = ['markdown']
 
 " Leader
 let mapleader = ","
@@ -249,6 +249,9 @@ set numberwidth=5
 :au InsertEnter * :set nornu
 set splitbelow
 set splitright
+
+" Set transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 "cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 command W w !sudo tee "%" > /dev/null
