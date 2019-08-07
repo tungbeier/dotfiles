@@ -6,6 +6,7 @@
 #
 DEFAULT_USER=`whoami` # Add default user to hide user@host in prompt
 
+CLASSPATH=".:.*:/usr/share/java/*"
 GOPATH=$HOME/go
 GOBIN=$GOPATH/bin
 M2_HOME=/opt/maven
@@ -14,7 +15,7 @@ export GOBIN
 export GOPATH
 export M2_HOME
 export PATH
-
+export CLASSPATH
 
 export TERM="xterm-256color" # 256 color schemes support
 
