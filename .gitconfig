@@ -16,7 +16,7 @@
 	br = branch
 	cp = cherry-pick
 	cl = clone
-	st = status
+	st = status --short --branch --show-stash
 	sh = stash
 	pl = pull
 	ps = push
