@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: bashtemplate
+#
+#         USAGE: ./bashtemplate [OPTION]
+#
+#   DESCRIPTION: Print predefined comment for bash scripting
+#
+#       OPTIONS: - header: print the shebang and predefined file description
+#                - function: print a comment to describe a function
+#  REQUIREMENTS: bash
+#         NOTES: Inspired by vim bash-support plugin
+#        AUTHOR: tung beier
+#       CREATED: 25 June 2019 21:36 CEST
+#      REVISION: 1.0.0
+#===============================================================================
+
+set -o nounset                              # Treat unset variables as an error
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: print_header
+#   DESCRIPTION: print the shebang and predefined comment to describe the script
+#-------------------------------------------------------------------------------
+function print_header {
+  cat <<EOF
+#!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: test.sh
+#
+#         USAGE: ./test.sh
+#
+#   DESCRIPTION:
+#
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: tung beier
+#       CREATED: `date '+%d %B %Y %H:%M %Z'`
+#      REVISION: 1.0.0
+#===============================================================================
+
+set -o nounset                              # Treat unset variables as an error
+
+EOF
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: print_function
+#   DESCRIPTION: comment uses to describe a function
+#-------------------------------------------------------------------------------
+function print_function {
+  cat <<EOF
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME:
+#   DESCRIPTION:
+#    PARAMETERS:
+#       RETURNS:
+#-------------------------------------------------------------------------------
+EOF
+}
+
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+if [ "$#" -ne 1 ]
+then
+  echo "Expect one argument but got ${#} instead"
+fi
+
+case $1 in
+  header)
+    print_header
+    ;;
+  function)
+    print_function
+    ;;
+  *)
+    echo "Usage: bashtemplate [header|function]"
+    ;;
+esac
+

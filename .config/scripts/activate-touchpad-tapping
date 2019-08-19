@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+touchpad_id=`xinput --list | grep -oP 'Synaptics.*id=\K.*?(?=\s)'`
+
+tapping_string=`xinput list-props ${touchpad_id} | grep 'Tapping Enabled ('`
+is_tapping_enabled=`echo ${tapping_string} | awk '{print $5}'`
+
+if [ ${is_tapping_enabled} = "1" ]; then
+    echo 'Touchpad tapping is already enabled. Nothing to do.'
+    exit 0
+fi
+
+tapping_id=`echo ${tapping_string} | awk '{print $4}' | tr -dc '0-9'`
+
+xinput set-prop ${touchpad_id} ${tapping_id} 1
+

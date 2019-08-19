@@ -10,7 +10,7 @@ CLASSPATH=".:.*:/usr/share/java/*"
 GOPATH=$HOME/go
 GOBIN=$GOPATH/bin
 M2_HOME=/opt/maven
-PATH=$PATH:$HOME/bin:/usr/bin:/usr/local/bin:$M2_HOME/bin:$GOBIN
+PATH=$PATH:$HOME/bin:/usr/local/bin:$HOME/.config/scripts:$M2_HOME/bin:$GOBIN
 export GOBIN
 export GOPATH
 export M2_HOME

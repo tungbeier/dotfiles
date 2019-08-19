@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+NEW_VOLUME="pkill -RTMIN+10 i3blocks"
+case $1 in
+    up) amixer -q set Master 10%+ ; $NEW_VOLUME ;;
+    down) amixer -q set Master 10%- ; $NEW_VOLUME ;;
+esac
+
+VOLUME=`amixer get Master | grep % | awk '{print $4}' | sed 's/[^0-9]//g'`
+if [ "${VOLUME}" -eq "0" ]; then
+    ICON=🔇
+elif [ "${VOLUME}" -gt "70" ]; then
+    ICON="🔊"
+elif [ "${VOLUME}" -lt "35" ]; then
+    ICON="🔈"
+else
+    ICON="🔉"
+fi
+
+echo "<span color='white'>${ICON} ${VOLUME}%</span>"
+

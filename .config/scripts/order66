@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+idea="$HOME/downloads/idea-system"
+dest="$HOME/backup/"
+
+if [ -d ${dest} ]; then
+    mkdir -pv $HOME/backup
+fi
+
+if [ -d ${idea} ]; then
+    rsync -aAXPv --delete ${idea} ${dest}
+fi
+
+shutdown -h now

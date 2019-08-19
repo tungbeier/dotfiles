@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+DATE=$(date '+%a - %d %b %Y ')
+TIME=$(date '+%H:%M')
+
+echo "<span fgcolor='grey'>${TIME} 🕓 ${DATE}</span>"

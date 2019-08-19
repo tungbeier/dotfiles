@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# dependencies: i3lock-color(AUR) scrot imagemagick
+
+icon="$HOME/.config/wallpapers/archlinux.png"
+image='/tmp/screen.png'
+
+# take the screenshot
+scrot "$image"
+# blur the image
+#convert "$image" -filter Gaussian -thumbnail 40% -sample 250% "$image"
+convert "$image" -blur 0x4 "$image"
+# overlay the icon
+#convert "$image" "$icon" -gravity NorthEast -composite "$image"
+
+B='#00000000'  # blank
+C='#ffffff22'  # clear ish
+D='#eee8d5ff'  # default
+T='#002b36ff'  # text
+W='#dc322fff'  # wrong
+V='#b58900ff'  # verifying
+
+
+i3lock -t -e -f \
+    -i "$image" \
+    --insidevercolor=$C   \
+    --ringvercolor=$V     \
+    \
+    --insidewrongcolor=$C \
+    --ringwrongcolor=$W   \
+    \
+    --insidecolor=$B      \
+    --ringcolor=$D        \
+    --linecolor=$B        \
+    --separatorcolor=$D   \
+    \
+    --verifcolor=$T       \
+    --wrongcolor=$T       \
+    --layoutcolor=$T      \
+    --keyhlcolor=$W       \
+    --bshlcolor=$W        \
+    \
+    --radius=65           \
+    --ring-width=30       \
+    --veriftext=""        \
+    --wrongtext=""        \
+    --noinputtext=""      \
+    --screen 2            \
+#    --indpos="x+50:h-50"  \
+
+rm "$image"
+

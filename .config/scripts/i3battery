@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Expect battery number as first parameter.
+# Return current capacity and status.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+function get_battery_status {
+    local CAPACITY=`cat /sys/class/power_supply/BAT${1}/capacity`
+    local STATUS=`cat /sys/class/power_supply/BAT${1}/status`
+
+    if [ "${STATUS}" = "Charging" ]; then
+        color="teal"
+    elif [ "${CAPACITY}" -ge 70 ]; then
+        color="green"
+    elif [ "${CAPACITY}" -ge 35 ]; then
+        color="yellow"
+    else
+        color="red"
+    fi
+
+    case ${STATUS} in
+        Discharging) STATUS=🔋 ;;
+        Charging) STATUS=🔌 ;;
+        Unknown) STATUS=❓ ;;
+        Full) STATUS=⚡ ;;
+    esac
+
+    case ${1} in
+        0) TAG=Int ;;
+        1) TAG=Ext ;;
+    esac
+
+#    echo "<span bgcolor='${color}' fgcolor='black'>${TAG} ${CAPACITY}%${STATUS}</span>"
+    echo "<span fgcolor='${color}'>${TAG}${STATUS}${CAPACITY}%</span>"
+}
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Script's logic
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BAT0=$(get_battery_status 0)
+BAT1=$(get_battery_status 1)
+echo "${BAT0} <span fgcolor='gray'>|</span> ${BAT1}"
+

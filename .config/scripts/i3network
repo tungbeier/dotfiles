@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+#     📡
+ETHERNET=enp0s31f6
+WIRELESS=wlp3s0
+
+function get_network {
+    local STATE=`cat /sys/class/net/${1}/operstate`
+
+    case ${1} in
+        ${ETHERNET}) TAG= ;;
+        ${WIRELESS}) TAG= ;;
+    esac
+
+    case ${STATE} in
+        up) COLOR="green" ;;
+        down) COLOR="red" ;;
+    esac
+
+    local QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70 - 1) }')
+    if [[ $QUALITY -ge 80 ]]; then
+        echo "#00FF00"
+    elif [[ $QUALITY -lt 40 ]]; then
+        echo "#FF0000"
+    elif [[ $QUALITY -lt 60 ]]; then
+        echo "#FF8000"
+    elif [[ $QUALITY -lt 80 ]]; then
+        echo "#FFF600"
+    fi
+
+    echo "<span fgcolor='${COLOR}'>${TAG}</span>"
+}
+
+
+echo "$(get_network ${ETHERNET}) $(get_network ${WIRELESS})"

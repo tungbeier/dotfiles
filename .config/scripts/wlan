@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Start wlan interface
+
+WLAN_INTERFACE=wlp3s0
+WPA_NAME=daynoir24
+
+if [ ! -z "${1}" ]; then
+    WPA_NAME=${1}
+fi
+
+echo "Stop ${WLAN_INTERFACE}"
+sudo -S ip link set ${WLAN_INTERFACE} down
+
+echo "Start ${WPA_NAME}"
+sudo -S netctl start ${WPA_NAME}
+
