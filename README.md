@@ -1,4 +1,6 @@
 # DOTFILES
+[![GitHub](https://img.shields.io/github/license/tungbeier/dotfiles)](https://raw.githubusercontent.com/tungbeier/dotfiles/master/LICENSE)
+<br/>
 Dotfiles setup using git bare repository functionality.
 
 ## Setup
