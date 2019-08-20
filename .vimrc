@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'sheerun/vim-polyglot'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -21,8 +20,6 @@ Plug 'udalov/kotlin-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
-" Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -57,10 +54,6 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
-
-" NERDTree
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 
 " Airline
 let g:airline_powerline_fonts = 1
@@ -186,8 +179,6 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-nmap <leader>n :NERDTreeToggle<cr>
-
 " =============================================================================
 " => Disabling arrow keys
 " =============================================================================
@@ -211,8 +202,7 @@ func! DeleteTrailingWS()
   %s/\s\+$//ge
   exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite * :call DeleteTrailingWS()
 
 "au BufRead,BufNewFile *.py, *.pyw, *.c, *.cpp, *.h match BadWhiteSpace /\s\+$/
 au BufRead,BufNewFile *.c, *.cpp, *.h match BadWhiteSpace /\s\+$/
@@ -224,13 +214,6 @@ au BufRead,BufNewFile *.c, *.cpp, *.h match BadWhiteSpace /\s\+$/
 set ttimeout
 set ttimeoutlen=20
 set notimeout
-
-" =============================================================================
-" => Enable folding
-" =============================================================================
-" set foldmethod=indent
-" set foldlevel=99
-" nnoremap <space> za " folding with spacebar
 
 " =============================================================================
 " => Others
