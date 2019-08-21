@@ -1,35 +1,61 @@
 #!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3network
+#
+#         USAGE: ./i3network
+#
+#   DESCRIPTION: Used by i3blocks to print the network information.
+#
+#        AUTHOR: tung beier
+#       CREATED: 21 August 2019 20:00 CEST
+#===============================================================================
 
-#     📡
-ETHERNET=enp0s31f6
-WIRELESS=wlp3s0
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o nounset  # Treat unset variables as an error
+set -o pipefail # Exit when a command in a pipeline fails
 
-function get_network {
-    local STATE=`cat /sys/class/net/${1}/operstate`
 
-    case ${1} in
-        ${ETHERNET}) TAG= ;;
-        ${WIRELESS}) TAG= ;;
-    esac
+#---  GLOBAL VARIABLES  --------------------------------------------------------
+readonly ethernet_interface=enp0s31f6
+readonly wireless_interface=wlp3s0
 
-    case ${STATE} in
-        up) COLOR="green" ;;
-        down) COLOR="red" ;;
-    esac
 
-    local QUALITY=$(grep $INTERFACE /proc/net/wireless | awk '{ print int($3 * 100 / 70 - 1) }')
-    if [[ $QUALITY -ge 80 ]]; then
-        echo "#00FF00"
-    elif [[ $QUALITY -lt 40 ]]; then
-        echo "#FF0000"
-    elif [[ $QUALITY -lt 60 ]]; then
-        echo "#FF8000"
-    elif [[ $QUALITY -lt 80 ]]; then
-        echo "#FFF600"
-    fi
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_network
+#   DESCRIPTION: Print the current ethernet and wireless network status
+#    PARAMETERS: $1 = the network interface name
+#       RETURNS: The network information
+#-------------------------------------------------------------------------------
+_get_network() {
+  local state=$(cat /sys/class/net/${1}/operstate)
 
-    echo "<span fgcolor='${COLOR}'>${TAG}</span>"
+  local tag=" "
+  if [[ "$1" = "$wireless_interface" ]]; then
+    tag=" "
+  fi
+
+  local color="red"
+  if [[ "$state" = "up" ]]; then
+    color="green"
+  fi
+
+  local quality=$(grep "$wireless_interface" /proc/net/wireless \
+    | awk '{ print int($3 * 100 / 70 - 1) }')
+  if [[ $quality -ge 80 ]]; then
+    echo "#00FF00"
+  elif [[ $quality -lt 40 ]]; then
+    echo "#FF0000"
+  elif [[ $quality -lt 60 ]]; then
+    echo "#FF8000"
+  elif [[ $quality -lt 80 ]]; then
+    echo "#FFF600"
+  fi
+
+  echo "<span fgcolor='${color}'>${tag}</span>"
 }
 
 
-echo "$(get_network ${ETHERNET}) $(get_network ${WIRELESS})"
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+echo "$(_get_network ${ethernet_interface}) $(_get_network ${wireless_interface})"

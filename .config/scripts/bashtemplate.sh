@@ -21,7 +21,7 @@ set -o nounset  # Treat unset variables as an error
 set -o pipefail # Exit when a command in a pipeline fails
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: print_header
+#          NAME: _print_header
 #   DESCRIPTION: print the shebang and predefined comment to describe the script
 #-------------------------------------------------------------------------------
 _print_header() {
@@ -51,7 +51,7 @@ EOF
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: print_function
+#          NAME: _print_function
 #   DESCRIPTION: comment uses to describe a function
 #-------------------------------------------------------------------------------
 _print_function() {
@@ -68,8 +68,8 @@ EOF
 }
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: print_function
-#   DESCRIPTION: comment uses to describe a function
+#          NAME: _print_usage
+#   DESCRIPTION: print usage information for this script
 #-------------------------------------------------------------------------------
 _print_usage() {
   cat <<EOF

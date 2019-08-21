@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #===============================================================================
 #
-#          FILE: order66
+#          FILE: sync-system-folders.sh
 #
-#         USAGE: ./order66
+#         USAGE: ./sync-system-folders.sh
 #
-#   DESCRIPTION: Backup some folders and shutdown.
+#   DESCRIPTION: Copy some system folders to a ram disk at start.
 #
 #  REQUIREMENTS: rsync
 #        AUTHOR: tung beier
-#       CREATED: 21 August 2019 20:42 CEST
+#       CREATED: 21 August 2019 20:45 CEST
 #===============================================================================
 
 set -o errexit  # Exit when a command fails
@@ -19,16 +19,10 @@ set -o pipefail # Exit when a command in a pipeline fails
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-idea="$HOME/downloads/idea-system"
-dest="$HOME/backup/"
+idea="$HOME/backup/idea-system"
+dest="$HOME/downloads/"
 
-if [[ -d "$dest" ]]; then
-  mkdir -pv $HOME/backup
+if [ -d ${idea} ]; then
+  rsync -aAXPv --delete ${idea} ${dest}
 fi
-
-if [[ -d "$idea" ]]; then
-  rsync -aAXPv --delete $idea $dest
-fi
-
-shutdown -h now
 

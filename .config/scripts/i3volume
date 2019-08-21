@@ -1,21 +1,39 @@
 #!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3volume
+#
+#         USAGE: ./i3volume
+#
+#   DESCRIPTION: Used by i3blocks to display the current sound level.
+#
+#        AUTHOR: tung beier
+#       CREATED: 21 August 2019 20:17 CEST
+#===============================================================================
 
-NEW_VOLUME="pkill -RTMIN+10 i3blocks"
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o nounset  # Treat unset variables as an error
+set -o pipefail # Exit when a command in a pipeline fails
+
+
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+new_volume="pkill -RTMIN+10 i3blocks"
 case $1 in
-    up) amixer -q set Master 10%+ ; $NEW_VOLUME ;;
-    down) amixer -q set Master 10%- ; $NEW_VOLUME ;;
+  up) amixer -q set Master 10%+ ; $new_volume ;;
+  down) amixer -q set Master 10%- ; $new_volume ;;
 esac
 
-VOLUME=`amixer get Master | grep % | awk '{print $4}' | sed 's/[^0-9]//g'`
-if [ "${VOLUME}" -eq "0" ]; then
-    ICON=🔇
-elif [ "${VOLUME}" -gt "70" ]; then
-    ICON="🔊"
-elif [ "${VOLUME}" -lt "35" ]; then
-    ICON="🔈"
+volume=$(amixer get Master | grep % | awk '{print $4}' | sed 's/[^0-9]//g')
+if [[ "$volume" -eq "0" ]]; then
+  icon="🔇"
+elif [[ "$volume" -gt "70" ]]; then
+  icon="🔊"
+elif [[ "$volume" -lt "35" ]]; then
+  icon="🔈"
 else
-    ICON="🔉"
+  icon="🔉"
 fi
 
-echo "<span color='white'>${ICON} ${VOLUME}%</span>"
+echo "<span color='white'>${icon} ${volume}%</span>"
 

@@ -1,43 +1,62 @@
 #!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3battery
+#
+#         USAGE: ./i3battery
+#
+#   DESCRIPTION: Used by i3blocks to print the battery status.
+#
+#        AUTHOR: tung beier
+#       CREATED: 21 August 2019 19:29 CEST
+#===============================================================================
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Expect battery number as first parameter.
-# Return current capacity and status.
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-function get_battery_status {
-    local CAPACITY=`cat /sys/class/power_supply/BAT${1}/capacity`
-    local STATUS=`cat /sys/class/power_supply/BAT${1}/status`
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o nounset  # Treat unset variables as an error
+set -o pipefail # Exit when a command in a pipeline fails
 
-    if [ "${STATUS}" = "Charging" ]; then
-        color="teal"
-    elif [ "${CAPACITY}" -ge 70 ]; then
-        color="green"
-    elif [ "${CAPACITY}" -ge 35 ]; then
-        color="yellow"
-    else
-        color="red"
-    fi
 
-    case ${STATUS} in
-        Discharging) STATUS=🔋 ;;
-        Charging) STATUS=🔌 ;;
-        Unknown) STATUS=❓ ;;
-        Full) STATUS=⚡ ;;
-    esac
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_battery_status
+#   DESCRIPTION: Print the battery information based on it capacity and status
+#    PARAMETERS: $1 = Battery number (either 0 or 1)
+#       RETURNS: The battery information with its color and capacity in prozent
+#-------------------------------------------------------------------------------
+_get_battery_status() {
+  local capacity=$(cat /sys/class/power_supply/BAT${1}/capacity)
+  local status=$(cat /sys/class/power_supply/BAT${1}/status)
 
-    case ${1} in
-        0) TAG=Int ;;
-        1) TAG=Ext ;;
-    esac
+  local color="green"
+  if [[ "$status" = "Charging" ]]; then
+    color="teal"
+  elif [[ "$capacity" -ge 65 ]]; then
+    color="green"
+  elif [[ "$capacity" -ge 25 ]]; then
+    color="yellow"
+  else
+    color="red"
+  fi
 
-#    echo "<span bgcolor='${color}' fgcolor='black'>${TAG} ${CAPACITY}%${STATUS}</span>"
-    echo "<span fgcolor='${color}'>${TAG}${STATUS}${CAPACITY}%</span>"
+  case $status in
+    Discharging) status=🔋 ;;
+    Charging) status=🔌 ;;
+    Unknown) status=❓ ;;
+    Full) status=⚡ ;;
+  esac
+
+  local tag="Unknown"
+  case $1 in
+    0) tag="Int" ;;
+    1) tag="Ext" ;;
+  esac
+
+echo "<span fgcolor='${color}'>${tag}${status}${capacity}%</span>"
 }
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Script's logic
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-BAT0=$(get_battery_status 0)
-BAT1=$(get_battery_status 1)
-echo "${BAT0} <span fgcolor='gray'>|</span> ${BAT1}"
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+bat_0=$(_get_battery_status 0)
+bat_1=$(_get_battery_status 1)
+
+echo "${bat_0} <span fgcolor='gray'>|</span> ${bat_1}"
 

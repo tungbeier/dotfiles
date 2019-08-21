@@ -1,6 +1,25 @@
 #!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3datetime
+#
+#         USAGE: ./i3datetime
+#
+#   DESCRIPTION: Used by i3blocks to print the date and time information.
+#
+#        AUTHOR: tung beier
+#       CREATED: 21 August 2019 19:57 CEST
+#===============================================================================
 
-DATE=$(date '+%a - %d %b %Y ')
-TIME=$(date '+%H:%M')
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o nounset  # Treat unset variables as an error
+set -o pipefail # Exit when a command in a pipeline fails
 
-echo "<span fgcolor='grey'>${TIME} 🕓 ${DATE}</span>"
+
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+date=$(date '+%a - %d %b %Y ')
+time=$(date '+%H:%M')
+
+echo "<span fgcolor='grey'>${time} 🕓 ${date}</span>"
+

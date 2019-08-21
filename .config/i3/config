@@ -1,6 +1,6 @@
 #      _ _____                    __ _                       _   _
 #     (_)___ /    ___ ___  _ __  / _(_) __ _ _   _ _ __ __ _| |_(_) ___  _ __
-#     | | |_ \   / __/ _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \ 
+#     | | |_ \   / __/ _ \| '_ \| |_| |/ _` | | | | '__/ _` | __| |/ _ \| '_ \
 #     | |___) | | (_| (_) | | | |  _| | (_| | |_| | | | (_| | |_| | (_) | | | |
 #     |_|____/   \___\___/|_| |_|_| |_|\__, |\__,_|_|  \__,_|\__|_|\___/|_| |_|
 #                                      |___/
@@ -217,7 +217,7 @@ bindsym $mod+Up exec --no-startup-id i3volume up
 bindsym $mod+Down exec --no-startup-id i3volume down
 
 # Lock screen
-set $lock "$HOME/bin/lockscreen"
+set $lock "$HOME/.config/scripts/lockscreen.sh"
 bindsym $mod+Control+l exec $lock
 exec xautolock -detectsleep -time 5 -locker $lock -notify 30 -notifier "Lock screen in 30 seconds"
 

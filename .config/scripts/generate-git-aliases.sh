@@ -19,18 +19,18 @@ set -o nounset  # Treat unset variables as an error
 set -o pipefail # Exit when a command in a pipeline fails
 
 #---  GLOBAL VARIABLES  --------------------------------------------------------
-readonly GIT_CONFIG_FILE=$HOME/.gitconfig
+readonly git_config_file=$HOME/.gitconfig
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: checkGitConfig
+#          NAME: _check_git_config
 #   DESCRIPTION: check whether the global git config file has changed and the
 #                git alias file has to be re-/generate
 #       RETURNS: NO-DOING = if the git config file has not changed
 #                GENERATE = if the git config file has never been checked
 #                           or it has changed
 #-------------------------------------------------------------------------------
-_checkGitConfig() {
+_check_git_config() {
   local checksum_folder=$HOME/.config/checksums/
   if [[ ! -d "$checksum_folder" ]]; then
     mkdir -p "$checksum_folder"
@@ -40,7 +40,7 @@ _checkGitConfig() {
 
   if [[ ! -f "$checksum_file" ]]; then
     touch "$checksum_file"
-    md5sum "$GIT_CONFIG_FILE" > "$checksum_file"
+    md5sum "$git_config_file" > "$checksum_file"
     echo 'GENERATE'
   else
     local check_result=$(md5sum -c --quiet "$checksum_file" 2> /dev/null)
@@ -48,7 +48,7 @@ _checkGitConfig() {
     if [[ -z "$check_result" ]]; then
       echo 'NO-DOING'
     else
-      md5sum "$GIT_CONFIG_FILE" > "$checksum_file"
+      md5sum "$git_config_file" > "$checksum_file"
       echo 'GENERATE'
     fi
   fi
@@ -56,10 +56,10 @@ _checkGitConfig() {
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: generateAliasFile
+#          NAME: _generate_alias_file
 #   DESCRIPTION: generate and fill the zsh alias file with git aliases
 #-------------------------------------------------------------------------------
-_generateAliasFile() {
+_generate_alias_file() {
   local alias_file=$HOME/.config/alias/git.zsh
 
   if [[ ! -f "$alias_file" ]]; then
@@ -78,51 +78,51 @@ alias gup="git remote update -p && git merge --ff-only @{u}"
 EOF
 
   local marker=0
-  local aliasModuleRegex="^\[alias\]$"
-  local otherModulesRegex="^\[\w+\]$"
-  local specialAliases="^up=.+$"
+  local alias_module_regex="^\[alias\]$"
+  local other_module_regex="^\[\w+\]$"
+  local special_aliases="^up=.+$"
 
   while read -r line; do
     if [[ -z "$line" ]]; then
       continue
     fi
 
-    if [[ $line =~ $aliasModuleRegex ]]; then
+    if [[ $line =~ $alias_module_regex ]]; then
       # Found the alias config
       marker=1
     fi
 
     if [[ "$marker" -eq 1 ]] \
-      && [[ ! $line =~ $aliasModuleRegex ]] \
-      && [[ $line =~ $otherModulesRegex ]]; then
+      && [[ ! $line =~ $alias_module_regex ]] \
+      && [[ $line =~ $other_module_regex ]]; then
       # Find the next module config
       break
     fi
 
     if [[ "$marker" -eq 1 ]]; then
-      local lineWithoutFirstSpace="${line/ /}"
+      local line_without_first_space="${line/ /}"
 
-      if [[ $line =~ $aliasModuleRegex ]] \
-        || [[ $lineWithoutFirstSpace =~ $specialAliases ]]; then
+      if [[ $line =~ $alias_module_regex ]] \
+        || [[ $line_without_first_space =~ $special_aliases ]]; then
         continue
       fi
 
-      local gitAlias="${lineWithoutFirstSpace/ /\'git }"
+      local gitAlias="${line_without_first_space/ /\'git }"
       echo "alias g${gitAlias}'" >> "$alias_file"
     fi
 
-  done < "$GIT_CONFIG_FILE"
+  done < "$git_config_file"
 }
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-if [[ ! -f "${GIT_CONFIG_FILE}" ]]; then
+if [[ ! -f "${git_config_file}" ]]; then
   # There is no config file
   return 0
 fi
 
-checkGitConfigResult=$(_checkGitConfig)
-if [[ "$checkGitConfigResult" == "GENERATE" ]]; then
-  _generateAliasFile
+check_config_file_result=$(_check_git_config)
+if [[ "$check_config_file_result" == "GENERATE" ]]; then
+  _generate_alias_file
 fi
 
