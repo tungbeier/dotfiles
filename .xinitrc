@@ -10,8 +10,11 @@ if [ -x "$HOME/.xprofile" ]; then
 fi
 
 amixer set 'Master' 0
-activate-touchpad-tapping
-sync-system-folders
+
+/home/tung/.config/scripts/activate-touchpad-tapping
+
+/home/tung/.config/scripts/sync-system-folders
+
 /home/tung/.config/scripts/generate-git-aliases.sh
 
 exec i3
