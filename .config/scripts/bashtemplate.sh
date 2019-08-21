@@ -24,7 +24,7 @@ set -o pipefail # Exit when a command in a pipeline fails
 #          NAME: print_header
 #   DESCRIPTION: print the shebang and predefined comment to describe the script
 #-------------------------------------------------------------------------------
-function print_header {
+_print_header() {
   cat <<EOF
 #!/usr/bin/env bash
 #===============================================================================
@@ -54,7 +54,7 @@ EOF
 #          NAME: print_function
 #   DESCRIPTION: comment uses to describe a function
 #-------------------------------------------------------------------------------
-function print_function {
+_print_function() {
   cat <<EOF
 #---  FUNCTION  ----------------------------------------------------------------
 #          NAME:
@@ -62,24 +62,58 @@ function print_function {
 #    PARAMETERS:
 #       RETURNS:
 #-------------------------------------------------------------------------------
+_function() {
+}
+EOF
+}
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: print_function
+#   DESCRIPTION: comment uses to describe a function
+#-------------------------------------------------------------------------------
+_print_usage() {
+  cat <<EOF
+Usage: bashtemplate [OPTION]
+Print predefined template to use in bash scripts.
+Options:
+  -h, --header    print script header template
+  -f, --function  print function template
 EOF
 }
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-if [ "$#" -ne 1 ]
-then
-  echo "Expect one argument but got ${#} instead"
+if [[ "$#" -eq 0 ]]; then
+  cat <<EOF
+bashtemplate: missing argument
+Try 'bashtemplate --help' for more information
+EOF
+  exit 1
+fi
+
+if [[ "$#" -gt 1 ]]; then
+  cat <<EOF
+bashtemplate: too many arguments
+Try 'bashtemplate --help' for more information
+EOF
+  exit 1
 fi
 
 case $1 in
-  header)
-    print_header
+  -h|--header)
+    _print_header
     ;;
-  function)
-    print_function
+  -f|--function)
+    _print_function
+    ;;
+  --help)
+    _print_usage
     ;;
   *)
-    echo "Usage: bashtemplate [header|function]"
+    cat <<EOF
+bashtemplate: unknown option
+Try 'bashtemplate --help' for more information
+EOF
+    exit 1
     ;;
 esac
 
