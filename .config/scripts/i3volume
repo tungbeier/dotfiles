@@ -18,11 +18,14 @@ set -o pipefail # Exit when a command in a pipeline fails
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-new_volume="pkill -RTMIN+10 i3blocks"
-case $1 in
-  up) amixer -q set Master 10%+ ; $new_volume ;;
-  down) amixer -q set Master 10%- ; $new_volume ;;
-esac
+if [[ "$#" -eq 1 ]]; then
+  case $1 in
+    up) amixer -q set Master 10%+ ;;
+    down) amixer -q set Master 10%- ;;
+  esac
+
+  pkill -RTMIN+10 i3blocks
+fi
 
 volume=$(amixer get Master | grep % | awk '{print $4}' | sed 's/[^0-9]//g')
 if [[ "$volume" -eq "0" ]]; then
