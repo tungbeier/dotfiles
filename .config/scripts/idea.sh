@@ -14,15 +14,14 @@
 
 set -o errexit  # Exit when a command fails
                 # Use || true if a command is allowed to fail
-set -o nounset  # Treat unset variables as an error
 set -o pipefail # Exit when a command in a pipeline fails
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-idea="$HOME/backup/idea-system"
-dest="$HOME/downloads/"
+IDEA_PATH="$BACK_UP_PATH/idea-system"
 
-if [ -d ${idea} ]; then
-  rsync -aAXPv --delete ${idea} ${dest}
+if [[ -d "$IDEA_PATH" ]] && [[ ! -d "${RAM_DISK_PATH}/idea-system" ]]; then
+  rsync -aAXPv --delete $IDEA_PATH "${RAM_DISK_PATH}/"
 fi
 
+sh /opt/idea-IU/bin/idea.sh

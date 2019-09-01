@@ -13,8 +13,6 @@ amixer set 'Master' 0
 
 /home/tung/.config/scripts/activate-touchpad-tapping.sh
 
-/home/tung/.config/scripts/sync-system-folders.sh
-
 /home/tung/.config/scripts/generate-git-aliases.sh
 
 exec i3
