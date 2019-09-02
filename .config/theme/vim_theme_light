@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# LIGHT
-export VIM_THEME='light'
-
