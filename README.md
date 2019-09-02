@@ -3,17 +3,21 @@
 <br/>
 Dotfiles setup using git bare repository functionality.
 
-## Setup
+## How to track the dotfiles with a bare repository
 - Create a placeholder<br>
 `mkdir $HOME/dotfiles`
 - Initialize bare repository<br>
 `git init --bare $HOME/dotfiles`
-- Create alias<br>
-`alias dot='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'`
+- Create alias to interact with the dotfiles<br>
+`alias dot='git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'`<br/>
+so instead of `git add` or `git status`, use `dot add`, `dot status` etc.
 - Setup status to not show untracked files<br>
 `dot config --local status.showUntrackedFiles no`
 - Add remote<br>
 `dot remote add origin <remote-git-repository>`
+
+## Show currently tracked files
+`dot ls-tree -r master --name-only`
 
 ## Setting up a new machine
 - Clone to a temporary folder<br>
