@@ -35,11 +35,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=15"
 
 RANGER_LOAD_DEFAULT_RC=FALSE
 
-export GIT_AUTHOR_NAME="tung beier"
-export GIT_AUTHOR_EMAIL="beier.tung@web.de"
-export GIT_COMMITTER_NAME="tung beier"
-export GIT_COMMITTER_EMAIL="beier.tung@web.de"
-
 export RAM_DISK_PATH="$HOME/downloads"
 export BACK_UP_PATH="$HOME/backup"
 

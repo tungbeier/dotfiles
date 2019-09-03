@@ -33,3 +33,6 @@
 	rei = rebase -i
 	unstage = reset HEAD
 
+[user]
+	name = tung beier
+	email = beier.tung@web.de
