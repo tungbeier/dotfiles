@@ -222,6 +222,6 @@ bindsym $mod+Control+l exec $lock
 exec xautolock -detectsleep -time 5 -locker $lock -notify 30 -notifier "Lock screen in 30 seconds"
 
 exec --no-startup-id compton -CGb
-exec --no-startup-id st
+exec --no-startup-id st -e tmux
 
 exec_always --no-startup-id feh --bg-scale "$HOME/.config/wallpapers/bg.jpg"
