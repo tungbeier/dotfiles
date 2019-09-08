@@ -156,7 +156,7 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-au FileType h,c,cpp,sh,css,html,sql setlocal shiftwidth=2 tabstop=2 softtabstop=2
+au FileType c,cpp,h,css,html,sql,sh,yml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 set lbr " Linebreak
 set tw=140 " text width
@@ -204,8 +204,7 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite * :call DeleteTrailingWS()
 
-"au BufRead,BufNewFile *.py, *.pyw, *.c, *.cpp, *.h match BadWhiteSpace /\s\+$/
-au BufRead,BufNewFile *.c, *.cpp, *.h match BadWhiteSpace /\s\+$/
+au BufRead,BufNewFile *.py, *.pyw, *.c, *.cpp, *.h, *.java match BadWhiteSpace /\s\+$/
 
 " =============================================================================
 " => Timeout

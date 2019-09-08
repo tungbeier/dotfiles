@@ -57,7 +57,7 @@ interval=once
 
 [battery]
 command=i3battery
-interval=30
+interval=60
 
 [separator]
 full_text=Separator

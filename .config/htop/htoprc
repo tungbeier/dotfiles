@@ -1,12 +1,5 @@
-#      _     _
-#     | |__ | |_ ___  _ __  _ __ ___
-#     | '_ \| __/ _ \| '_ \| '__/ __|
-#     | | | | || (_) | |_) | | | (__
-#     |_| |_|\__\___/| .__/|_|  \___|
-#                    |_|
 # Beware! This file is rewritten by htop when settings are changed in the interface.
 # The parser is also very primitive, and not human-friendly.
-#
 fields=0 48 17 38 39 40 2 46 47 49 1
 sort_key=46
 sort_direction=1
@@ -31,4 +24,3 @@ left_meters=AllCPUs
 left_meter_modes=1
 right_meters=Hostname Clock Uptime Tasks LoadAverage Battery Blank Memory
 right_meter_modes=2 2 2 2 2 2 2 1
-

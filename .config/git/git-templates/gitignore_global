@@ -25,7 +25,6 @@
 # Folders #
 ###########
 tmp/
-local-xslt/
 101/
 dev-tmp/
 dev-temp/

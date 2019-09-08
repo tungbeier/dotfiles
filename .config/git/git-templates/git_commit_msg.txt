@@ -1,10 +1,12 @@
+#--- Header ---------------------------------------
+# If applied, this commit will...
 
-# 1) If applied, this commit will...
-#-------------------------------------------------
-# 2) Explain WHY / WHAT and NOT HOW this change is being made
+#--- Body ----------------------------------------------------------------------
+# Explain WHY / WHAT and NOT HOW this change is being made
 
-# 3) Provide links to any other relevant tickets and other reources
 #-------------------------------------------------------------------------------
+# Provide links to any other relevant tickets and other reources
+#
 # Reminder:
 #   * Limit the subject line to 50 characters
 #   * Do not end the subject line with a period

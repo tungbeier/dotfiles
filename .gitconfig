@@ -1,11 +1,15 @@
 [core]
 	editor = vim
 	fileMode = false
-	excludesfile = /home/tung/.config/git/git-templates/gitignore_global
+	excludesfile = ~/.config/git/git-templates/gitignore_global
+[merge]
+	tool = meld
+[mergetool "meld"]
+	path = /usr/bin/meld
 [init]
-	templatedir = /home/tung/.config/git/git-templates
+	templatedir = ~/.config/git/git-templates
 [commit]
-	template = /home/tung/.config/git/git-templates/git_commit_msg.txt
+	template = ~/.config/git/git-templates/git_commit_msg.txt
 [alias]
 	i = init
 	cl = clone
@@ -32,7 +36,8 @@
 	re = rebase
 	rei = rebase -i
 	unstage = reset HEAD
-
+[push]
+	default = current
 [user]
 	name = tung beier
 	email = beier.tung@web.de
