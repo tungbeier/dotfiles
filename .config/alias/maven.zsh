@@ -1,22 +1,19 @@
+#                                                        _   _
+#   _ __ ___     __ _  __   __   ___   _ __       __ _  | | (_)   __ _   ___
+#  | '_ ` _ \   / _` | \ \ / /  / _ \ | '_ \     / _` | | | | |  / _` | / __|
+#  | | | | | | | (_| |  \ V /  |  __/ | | | |   | (_| | | | | | | (_| | \__ \
+#  |_| |_| |_|  \__,_|   \_/    \___| |_| |_|    \__,_| |_| |_|  \__,_| |___/
+#-------------------------------------------------------------------------------
+alias m='mvn'
+
 alias mc='mvn clean'
 
 alias mi='mvn install'
-alias mio='mvn install -o'
-alias mif='mvn install -T 1C'
-alias miof='mvn install -o -T 1C'
-alias miont='mvn install -o -Dmaven.test.skip=true'
-alias mint='mvn install -Dmaven.test.skip=true'
-alias mir='mvn install -rf'
-alias mip='mvn install -pl'
+alias mio='mvn -o install'
+alias mif='mvn -T 1C install'
+alias miof='mvn -o -T 1C install'
+alias miont='mvn -o -Dmaven.test.skip=true install'
+alias mint='mvn -Dmaven.test.skip=true install'
 
-alias mci='mvn clean && mvn install'
-alias mcio='mvn clean && mvn install -o'
-alias mcif='mvn clean && mvn install -T 1C'
-alias mciof='mvn clean && mvn install -o -T 1C'
-alias mciont='mvn clean && mvn install -o -Dmaven.test.skip=true'
-alias mcint='mvn clean && mvn install -Dmaven.test.skip=true'
-alias mcir='mvn clean && mvn install -rf'
-alias mcip='mvn clean && mvn install -pl'
-
-alias miq='mvn clean && mvn install -o -T 1C -Dmaven.test.skip=true'
+alias mifnt='mvn -o -T 1C -Dmaven.test.skip=true install'
 
