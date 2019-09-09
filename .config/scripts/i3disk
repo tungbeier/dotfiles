@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3disk
+#
+#         USAGE: ./i3disk
+#
+#   DESCRIPTION: Used by i3blocks to print the disk usage information.
+#
+#        AUTHOR: tung beier
+#       CREATED: 09 September 2019 20:46 CEST
+#===============================================================================
+
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o nounset  # Treat unset variables as an error
+set -o pipefail # Exit when a command in a pipeline fails
+
+#---  GLOBAL VARIABLES  --------------------------------------------------------
+readonly ROOT_MOUNT_POINT="/dev/nvme0n1p2"
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_disk_status
+#   DESCRIPTION: Get the value of given field in df. See df --help for all the
+#                available fields name
+#    PARAMETERS: 1 = the field name
+#       RETURNS: the value of the given field
+#-------------------------------------------------------------------------------
+_get_disk_status() {
+  local STATUS=$(df -h --output=source,$1 | grep $ROOT_MOUNT_POINT | awk '{ print $2 }')
+  echo $STATUS
+}
+
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+DISK_USAGE=$(_get_disk_status used)
+DISK_AVAIL=$(_get_disk_status avail)
+DISK_PERCENT=$(_get_disk_status pcent)
+
+echo "<span fgcolor='white'> ${DISK_USAGE}/${DISK_AVAIL} ${DISK_PERCENT}</span>"
+

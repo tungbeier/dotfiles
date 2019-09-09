@@ -28,25 +28,14 @@ full_text=Separator
 command=i3separator
 interval=once
 
-#[disk]
-#label=
-#instance=/
-#color=grey
-#interval=3600
-#
-#[separator]
-#full_text=Separator
-#command=i3separator
-#interval=once
-#
-#[temperature]
-#label=
-#interval=10
-#
-#[separator]
-#full_text=Separator
-#command=i3separator
-#interval=once
+[disk_usage]
+command=i3disk
+interval=3600
+
+[separator]
+full_text=Separator
+command=i3separator
+interval=once
 
 [battery]
 command=i3battery
