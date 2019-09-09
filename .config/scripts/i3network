@@ -18,44 +18,58 @@ set -o pipefail # Exit when a command in a pipeline fails
 
 
 #---  GLOBAL VARIABLES  --------------------------------------------------------
-readonly ethernet_interface=enp0s31f6
-readonly wireless_interface=wlp3s0
+readonly ETHERNET_INTERFACE=enp0s31f6
+readonly WIRELESS_INTERFACE=wlp3s0
 
 
 #---  FUNCTION  ----------------------------------------------------------------
-#          NAME: _get_network
-#   DESCRIPTION: Print the current ethernet and wireless network status
-#    PARAMETERS: $1 = the network interface name
-#       RETURNS: The network information
+#          NAME: _get_ethernet_status
+#   DESCRIPTION: Print the current ethernet network status
+#       RETURNS: The ethernet information
 #-------------------------------------------------------------------------------
-_get_network() {
-  local state=$(cat /sys/class/net/${1}/operstate)
+_get_ethernet_status() {
+  local STATE=$(cat /sys/class/net/${ETHERNET_INTERFACE}/operstate)
+  local TAG=" "
+  local COLOR="red"
 
-  local tag=" "
-  if [[ "$1" = "$wireless_interface" ]]; then
-    tag=" "
+  local IP_ADDRESS=$(ip a | grep "${ETHERNET_INTERFACE}$" | awk '{ print $2 }')
+
+  if [[ "$STATE" = "up" ]]; then
+    COLOR="green"
+    echo "<span fgcolor='${COLOR}'>${TAG} ${IP_ADDRESS}</span>"
+  else
+    echo "<span fgcolor='${COLOR}'>${TAG} ${STATE}</span>"
   fi
+}
 
-  local color="red"
-  if [[ "$state" = "up" ]]; then
-    color="green"
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_wireless_status
+#   DESCRIPTION: Print the current wireless network status
+#       RETURNS: The wireless information
+#-------------------------------------------------------------------------------
+_get_wireless_status() {
+  local STATE=$(cat /sys/class/net/${WIRELESS_INTERFACE}/operstate)
+  local TAG=""
+  local IP_ADDRESS=$(ip a | grep "${WIRELESS_INTERFACE}$" | awk '{ print $2 }')
+
+  if [[ "$STATE" = "up" ]]; then
+    local QUALITY=$(grep "$WIRELESS_INTERFACE" /proc/net/wireless | awk '{ print int($3 * 100 / 70 - 1) }')
+    local COLOR="green"
+    if [[ $QUALITY -lt 75 ]]; then
+      COLOR="orange"
+    elif [[ $QUALITY -lt 45 ]]; then
+      COLOR="yellow"
+    elif [[ $QUALITY -lt 15 ]]; then
+      COLOR="red"
+    fi
+    echo "<span fgcolor='$COLOR'>${TAG} ${QUALITY}% ${IP_ADDRESS}</span>"
+  else
+    echo "<span fgcolor='red'>${TAG} ${STATE}</span>"
   fi
-
-  local quality=$(grep "$wireless_interface" /proc/net/wireless \
-    | awk '{ print int($3 * 100 / 70 - 1) }')
-  if [[ $quality -ge 80 ]]; then
-    echo "#00FF00"
-  elif [[ $quality -lt 40 ]]; then
-    echo "#FF0000"
-  elif [[ $quality -lt 60 ]]; then
-    echo "#FF8000"
-  elif [[ $quality -lt 80 ]]; then
-    echo "#FFF600"
-  fi
-
-  echo "<span fgcolor='${color}'>${tag}</span>"
 }
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-echo "$(_get_network ${ethernet_interface}) $(_get_network ${wireless_interface})"
+echo "$(_get_ethernet_status)  $(_get_wireless_status)"
+
