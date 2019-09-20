@@ -80,6 +80,8 @@ set autoread
 " Set how many lines of history Vim has to remember
 set history=1000
 
+set clipboard=unnamed
+set clipboard=unnamedplus
 " =============================================================================
 " => Vim user interface
 " =============================================================================

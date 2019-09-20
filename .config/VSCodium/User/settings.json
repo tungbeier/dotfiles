@@ -52,8 +52,8 @@
     "workbench.colorTheme": "One Dark Pro",
     "workbench.colorCustomizations": {
         "statusBar.background": "#002b36",
-        "statusBar.debuggingBackground": "#002b36",
-        "statusBar.noFolderBackground": "#002b36"
+        "statusBar.noFolderBackground": "#002b36",
+        "statusBar.debuggingBackground": "#002b36"
     },
     "workbench.enableExperiments": false,
     "workbench.iconTheme": "material-icon-theme",
