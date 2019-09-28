@@ -15,15 +15,15 @@ print_info() {
     info "Host" model
     info "Kernel" kernel
     prin
+    info "WM" wm
     info "Shell" shell
     info "Packages" packages
     info "Resolution" resolution
-    info "Local IP" local_ip
-    prin
-    info "WM" wm
-    info "WM Theme" wm_theme
-    info "Terminal" term
-    info "Terminal Font" term_font
+    # info "Local IP" local_ip
+    # prin
+    # info "WM Theme" wm_theme
+    # info "Terminal" term
+    # info "Terminal Font" term_font
     prin
     info "CPU" cpu
     info "GPU" gpu
