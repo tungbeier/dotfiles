@@ -20,6 +20,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
+Plug 'mboughaba/i3config.vim'
 
 call plug#end()
 
@@ -256,3 +257,9 @@ endfunction
 nnoremap <leader>e :call FzyCommand("ag -gS --silent .", ":e")<cr>
 nnoremap <leader>v :call FzyCommand("ag -gS --silent .", ":vs")<cr>
 nnoremap <leader>s :call FzyCommand("ag -gS --silent .", ":sp")<cr>
+
+" i3 config file detection
+aug i3config_ft_detection
+  au!
+  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+aug end
