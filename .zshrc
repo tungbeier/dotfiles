@@ -43,7 +43,7 @@ export BACK_UP_PATH="$HOME/backup"
 HISTSIZE=10000000
 SAVEHIST=10000000
 HIST_STAMPS="yyyy-mm-dd"
-HISTFILE=~/.zsh_history
+HISTFILE=~/.config/zsh/history
 
 plugins=(gitfast git-extras golang wd zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
