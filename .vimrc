@@ -201,9 +201,9 @@ set laststatus=2
 " =============================================================================
 " Delete trailing white space on save
 func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
 endfunc
 autocmd BufWrite * :call DeleteTrailingWS()
 
@@ -243,15 +243,15 @@ command W w !sudo tee "%" > /dev/null
 
 " Fzy
 function! FzyCommand(choice_command, vim_command)
-  try
-    let output = system(a:choice_command . " | fzy ")
-  catch /Vim:Interrupt/
-    " Swallow errors from ^C, allow redraw! below
-  endtry
-  redraw!
-  if v:shell_error == 0 && !empty(output)
-    exec a:vim_command . ' ' . output
-  endif
+    try
+        let output = system(a:choice_command . " | fzy ")
+    catch /Vim:Interrupt/
+        " Swallow errors from ^C, allow redraw! below
+    endtry
+    redraw!
+    if v:shell_error == 0 && !empty(output)
+        exec a:vim_command . ' ' . output
+    endif
 endfunction
 
 nnoremap <leader>e :call FzyCommand("ag -gS --silent .", ":e")<cr>
@@ -260,6 +260,6 @@ nnoremap <leader>s :call FzyCommand("ag -gS --silent .", ":sp")<cr>
 
 " i3 config file detection
 aug i3config_ft_detection
-  au!
-  au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+    au!
+    au BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
 aug end
