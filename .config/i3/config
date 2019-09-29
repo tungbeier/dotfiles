@@ -200,7 +200,7 @@ bar {
         status_command i3blocks
         tray_padding 5
         position top
-        height 30
+        height 35
         separator_symbol $separator_symbol
         colors {
             background  $bar_bg_color
@@ -218,7 +218,7 @@ bindsym $mod+Up exec --no-startup-id i3volume up
 bindsym $mod+Down exec --no-startup-id i3volume down
 
 # Lock screen
-set $lock "$HOME/.config/scripts/lockscreen.sh"
+set $lock "$HOME/.local/bin/lockscreen.sh"
 bindsym $mod+Control+l exec $lock
 exec xautolock -detectsleep -time 5 -locker $lock -notify 30 -notifier "Lock screen in 30 seconds"
 

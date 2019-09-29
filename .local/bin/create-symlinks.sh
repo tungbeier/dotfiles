@@ -18,18 +18,18 @@ set -o pipefail # Exit when a command in a pipeline fails
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
 SCRIPTS=(
-  i3battery
-  i3datetime
-  i3disk
-  i3network
-  i3separator
-  i3volume
+  i3blocks/i3battery
+  i3blocks/i3datetime
+  i3blocks/i3disk
+  i3blocks/i3network
+  i3blocks/i3separator
+  i3blocks/i3volume
   idea.sh
 )
 
-SCRIPT_PATH="${HOME}/.config/scripts"
+SCRIPT_PATH="${HOME}/.local/bin"
 
 for SCRIPT in "${SCRIPTS[@]}"; do
   echo "Create symlink for ${SCRIPT}"
-  sudo ln -sf "${SCRIPT_PATH}/${SCRIPT}" "/usr/local/bin/${SCRIPT}"
+  sudo ln -sf "${SCRIPT_PATH}/${SCRIPT}" "/usr/local/bin/${SCRIPT#*/}"
 done
