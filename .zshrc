@@ -3,14 +3,16 @@
 #     |_  / __| '_ \| '__/ __|
 #      / /\__ \ | | | | | (__
 #     /___|___/_| |_|_|  \___|
-#
-DEFAULT_USER=`whoami` # Add default user to hide user@host in prompt
+#-------------------------------------------------------------------------------
+
+# Add default user to hide user@host in prompt
+DEFAULT_USER=`whoami`
 
 CLASSPATH=".:.*:/usr/share/java/*"
 M2_HOME=/opt/maven
 GOPATH=$HOME/go
 GOBIN=$GOPATH/bin
-PATH=$PATH:/usr/bin:/usr/local/bin:$HOME/.config/scripts:$M2_HOME/bin:$GOBIN
+PATH=$PATH:$M2_HOME/bin:$GOBIN
 export GOBIN
 export GOPATH
 export M2_HOME
@@ -19,13 +21,9 @@ export CLASSPATH
 
 export DOCKER_HOST=tcp://127.0.0.1:2376
 
-export TERM="xterm-256color" # 256 color schemes support
+export TERM="xterm-256color"
 
 export BAT_THEME="DarkNeon"
-
-export EDITOR="vim"
-export USE_EDITOR=$EDITOR
-export VISUAL=$EDITOR
 
 export ZSH=$HOME/.oh-my-zsh
 
@@ -35,15 +33,13 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor root line)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=15"
 
-RANGER_LOAD_DEFAULT_RC=FALSE
-
 export RAM_DISK_PATH="$HOME/downloads"
 export BACK_UP_PATH="$HOME/backup"
 
 HISTSIZE=10000000
 SAVEHIST=10000000
 HIST_STAMPS="yyyy-mm-dd"
-HISTFILE=~/.config/zsh/history
+HISTFILE="$HOME/.config/zsh/history"
 
 plugins=(gitfast git-extras golang wd zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
