@@ -10,7 +10,7 @@
 print_info() {
     info title
     info underline
-
+    prin
     info "OS" distro
     info "Host" model
     info "Kernel" kernel
@@ -18,12 +18,6 @@ print_info() {
     info "WM" wm
     info "Shell" shell
     info "Packages" packages
-    info "Resolution" resolution
-    # info "Local IP" local_ip
-    # prin
-    # info "WM Theme" wm_theme
-    # info "Terminal" term
-    # info "Terminal Font" term_font
     prin
     info "CPU" cpu
     info "GPU" gpu
@@ -41,7 +35,7 @@ kernel_shorthand="on"
 distro_shorthand="off"
 
 # Show/Hide OS Architecture.
-os_arch="on"
+os_arch="off"
 
 
 # Uptime
@@ -49,18 +43,18 @@ uptime_shorthand="on"
 
 
 # Memory
-memory_percent="on"
+memory_percent="off"
 
 
 # Packages
-package_managers="on"
+package_managers="off"
 
 
 # Shell
 shell_path="off"
 
 # Show $SHELL version
-shell_version="on"
+shell_version="off"
 
 
 # CPU
@@ -90,7 +84,7 @@ gpu_type="all"
 
 
 # Resolution
-refresh_rate="on"
+refresh_rate="off"
 
 
 # Gtk Theme / Icons / Font
@@ -136,7 +130,7 @@ colors=(distro)
 
 
 # Text Options
-bold="on"
+bold="off"
 
 # Enable/Disable Underline
 underline_enabled="on"
@@ -195,13 +189,13 @@ image_source="auto"
 
 
 # Ascii distro
-ascii_distro="auto"
+ascii_distro="arch"
 
 # Ascii Colors
 ascii_colors=(distro)
 
 # Bold ascii logo
-ascii_bold="on"
+ascii_bold="off"
 
 
 # Image loop
