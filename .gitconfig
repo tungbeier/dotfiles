@@ -38,6 +38,7 @@
 	unstage = reset HEAD
 [push]
 	default = current
-[user]
-	name = tung beier
-	email = beier.tung@web.de
+[includeIf "gitdir:~/repositories/personal/"]
+	path = .config/git/git-configs/personal
+[includeIf "gitdir:~/repositories/work/"]
+	path = .config/git/git-configs/work
