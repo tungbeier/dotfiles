@@ -35,7 +35,7 @@ bindsym $mod+Return exec st
 bindsym $mod+Shift+c kill
 
 # Applications launcher
-bindsym $mod+d exec --no-startup-id $HOME/.config/i3/rofi
+bindsym $mod+d exec --no-startup-id $HOME/.config/rofi/rofi.sh
 
 # Change focus
 bindsym $mod+h focus left

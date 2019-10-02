@@ -1,6 +1,6 @@
 ! Use rofi -dump-xresources to read out the possible settings
 !rofi.theme:            solarized
-rofi.font:              Fira Code 15
+rofi.font:              Fira Code 20
 rofi.lines:             15
 rofi.separator-style:   dash
 rofi.hide-scrollbar:    true
