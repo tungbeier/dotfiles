@@ -28,18 +28,13 @@ readonly WIRELESS_INTERFACE=wlp3s0
 #       RETURNS: The ethernet information
 #-------------------------------------------------------------------------------
 _get_ethernet_status() {
-  local STATE=$(cat /sys/class/net/${ETHERNET_INTERFACE}/operstate)
   local TAG=" "
   local COLOR="red"
 
   local IP_ADDRESS=$(ip a | grep "${ETHERNET_INTERFACE}$" | awk '{ print $2 }')
 
-  if [[ "$STATE" = "up" ]]; then
-    COLOR="green"
-    echo "<span fgcolor='${COLOR}'>${TAG} ${IP_ADDRESS}</span>"
-  else
-    echo "<span fgcolor='${COLOR}'>${TAG} ${STATE}</span>"
-  fi
+  COLOR="green"
+  echo "<span fgcolor='${COLOR}'>${TAG} ${IP_ADDRESS}</span>"
 }
 
 
@@ -49,27 +44,40 @@ _get_ethernet_status() {
 #       RETURNS: The wireless information
 #-------------------------------------------------------------------------------
 _get_wireless_status() {
-  local STATE=$(cat /sys/class/net/${WIRELESS_INTERFACE}/operstate)
   local TAG=""
   local IP_ADDRESS=$(ip a | grep "${WIRELESS_INTERFACE}$" | awk '{ print $2 }')
 
-  if [[ "$STATE" = "up" ]]; then
-    local QUALITY=$(grep "$WIRELESS_INTERFACE" /proc/net/wireless | awk '{ print int($3 * 100 / 70 - 1) }')
-    local COLOR="green"
-    if [[ $QUALITY -lt 75 ]]; then
-      COLOR="orange"
-    elif [[ $QUALITY -lt 45 ]]; then
-      COLOR="yellow"
-    elif [[ $QUALITY -lt 15 ]]; then
-      COLOR="red"
-    fi
-    echo "<span fgcolor='$COLOR'>${TAG} ${QUALITY}% ${IP_ADDRESS}</span>"
+  local QUALITY=$(grep "$WIRELESS_INTERFACE" /proc/net/wireless | awk '{ print int($3 * 100 / 70 - 1) }')
+  local COLOR="green"
+  if [[ $QUALITY -lt 75 ]]; then
+    COLOR="orange"
+  elif [[ $QUALITY -lt 45 ]]; then
+    COLOR="yellow"
+  elif [[ $QUALITY -lt 15 ]]; then
+    COLOR="red"
+  fi
+  echo "<span fgcolor='$COLOR'>${TAG} ${QUALITY}% ${IP_ADDRESS}</span>"
+}
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_network_status
+#   DESCRIPTION: Print the network status
+#       RETURNS: The status of the network
+#-------------------------------------------------------------------------------
+_get_network_status() {
+  local WIRELESS_STATE=$(cat /sys/class/net/${WIRELESS_INTERFACE}/operstate)
+  local ETHERNET_STATE=$(cat /sys/class/net/${ETHERNET_INTERFACE}/operstate)
+
+  if [[ "$WIRELESS_STATE" == "down" && "$ETHERNET_STATE" == "down" ]]; then
+    echo "<span fgcolor='red'> down</span>"
+  elif [[ "$WIRELESS_STATE" = "up" ]]; then
+    echo "$(_get_wireless_status)"
   else
-    echo "<span fgcolor='red'>${TAG} ${STATE}</span>"
+    echo "$(_get_ethernet_status)"
   fi
 }
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-echo "$(_get_ethernet_status)  $(_get_wireless_status)"
-
+echo "$(_get_network_status)"
