@@ -150,10 +150,10 @@ block_range=(0 15)
 color_blocks="on"
 
 # Color block width in spaces
-block_width=3
+block_width=5
 
 # Color block height in lines
-block_height=1
+block_height=2
 
 
 # Progress Bars
