@@ -7,7 +7,7 @@
 #-------------------------------------------------------------------------------
 
 # Adds `~/.local/bin/` and all subdirectories to $PATH
-export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
+export PATH="$PATH:$(find "$HOME/.local/bin" -type d | tr '\n' ':' | sed 's/:$//')"
 
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
