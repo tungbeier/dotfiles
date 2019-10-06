@@ -19,8 +19,6 @@ export M2_HOME
 export PATH
 export CLASSPATH
 
-export DOCKER_HOST=tcp://127.0.0.1:2376
-
 export TERM="xterm-256color"
 
 export BAT_THEME="DarkNeon"
