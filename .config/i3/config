@@ -116,11 +116,6 @@ bindsym $mod+Shift+plus move container to workspace $workspace_4
 bindsym $mod+Shift+bracketright move container to workspace $workspace_6
 bindsym $mod+Shift+exclam move container to workspace $workspace_8
 
-
-assign [class="VirtualBox Machine"] $workspace_5
-assign [class="qutebrowser"] $workspace_3
-assign [class="DBeaver"] $workspace_1
-
 assign [class="St"] $workspace_0
 assign [class="jetbrains-idea"] $workspace_2
 assign [class="Chromium"] $workspace_4
@@ -216,6 +211,10 @@ bar {
 # Volume control
 bindsym $mod+Up exec --no-startup-id i3volume up
 bindsym $mod+Down exec --no-startup-id i3volume down
+
+# Backlighting control
+bindsym $mod+Left exec --no-startup-id i3backlight down
+bindsym $mod+Right exec --no-startup-id i3backlight up
 
 # Lock screen
 set $lock "$HOME/.local/bin/lockscreen.sh"

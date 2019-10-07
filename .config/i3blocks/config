@@ -9,6 +9,16 @@ separator_block_width=5
 markup=pango
 separator=false
 
+[backlight]
+command=i3backlight
+interval=once
+signal=11
+
+[separator]
+full_text=Separator
+command=i3separator
+interval=once
+
 [thermal]
 command=i3temp
 interval=60

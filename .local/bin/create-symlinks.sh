@@ -25,6 +25,7 @@ SCRIPTS=(
   i3blocks/i3separator
   i3blocks/i3volume
   i3blocks/i3temp
+  i3blocks/i3backlight
   idea.sh
 )
 
