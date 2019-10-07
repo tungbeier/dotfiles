@@ -24,39 +24,33 @@ set -o pipefail # Exit when a command in a pipeline fails
 #       RETURNS: The battery information with its color and capacity in prozent
 #-------------------------------------------------------------------------------
 _get_battery_status() {
-  local capacity=$(cat /sys/class/power_supply/BAT${1}/capacity)
-  local status=$(cat /sys/class/power_supply/BAT${1}/status)
+  local CAPACITY=$(cat /sys/class/power_supply/BAT${1}/capacity)
+  local STATUS=$(cat /sys/class/power_supply/BAT${1}/status)
 
-  local color="green"
-  if [[ "$status" = "Charging" ]]; then
-    color="teal"
-  elif [[ "$capacity" -ge 65 ]]; then
-    color="green"
-  elif [[ "$capacity" -ge 25 ]]; then
-    color="yellow"
+  local COLOR="Green"
+  if [[ "$STATUS" = "Charging" ]]; then
+    COLOR="Teal"
+  elif [[ "$CAPACITY" -ge 65 ]]; then
+    COLOR="Green"
+  elif [[ "$CAPACITY" -ge 25 ]]; then
+    COLOR="Yellow"
   else
-    color="red"
+    COLOR="Red"
   fi
 
-  case $status in
-    Discharging) status=🔋 ;;
-    Charging) status=🔌 ;;
-    Unknown) status=❓ ;;
-    Full) status=⚡ ;;
+  case $STATUS in
+    Discharging) STATUS=🔋 ;;
+    Charging) STATUS=🔌 ;;
+    Unknown) STATUS=❓ ;;
+    Full) STATUS=⚡ ;;
   esac
 
-  local tag="Unknown"
-  case $1 in
-    0) tag="Int" ;;
-    1) tag="Ext" ;;
-  esac
-
-echo "<span fgcolor='${color}'>${tag}${status}${capacity}%</span>"
+echo "<span fgcolor='${COLOR}'>${STATUS}${CAPACITY}%</span>"
 }
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-bat_0=$(_get_battery_status 0)
-bat_1=$(_get_battery_status 1)
+BAT_0=$(_get_battery_status 0)
+BAT_1=$(_get_battery_status 1)
 
-echo "${bat_0} <span fgcolor='gray'>|</span> ${bat_1}"
+echo "${BAT_0} <span fgcolor='gray'>|</span> ${BAT_1}"
 
