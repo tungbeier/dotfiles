@@ -31,4 +31,4 @@ if [[ "$#" -eq 1 ]]; then
 fi
 
 readonly CURRENT_BACKLIGHT=$(xbacklight -get | awk '{ print int($1) }')
-echo "<span color='gray'> ${CURRENT_BACKLIGHT}</span>"
+echo "<span color='grey'> ${CURRENT_BACKLIGHT}</span>"

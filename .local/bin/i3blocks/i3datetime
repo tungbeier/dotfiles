@@ -18,8 +18,8 @@ set -o pipefail # Exit when a command in a pipeline fails
 
 
 #---  SCRIPT LOGIC  ------------------------------------------------------------
-date=$(date '+%a - %d %b %Y ')
-time=$(date '+%H:%M')
+DATE=$(date '+%a - %d %b %Y ')
+TIME=$(date '+%H:%M')
 
-echo "<span fgcolor='grey'>${time} 🕓 ${date}</span>"
+echo "<span fgcolor='grey'>🕓 ${TIME}  ${DATE}  </span>"
 
