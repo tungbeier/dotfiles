@@ -22,6 +22,5 @@ alias rm='rm -iv'
 alias mkd='mkdir -pv'
 
 alias ww='w3m www.google.com'
-alias update='sudo pacman -Syu && yay -Syu'
 
 alias vifm='vifmrun'
