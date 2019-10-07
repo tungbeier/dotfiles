@@ -9,6 +9,15 @@ separator_block_width=5
 markup=pango
 separator=false
 
+[thermal]
+command=i3temp
+interval=60
+
+[separator]
+full_text=Separator
+command=i3separator
+interval=once
+
 [volume]
 command=i3volume
 interval=once

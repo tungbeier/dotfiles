@@ -24,6 +24,7 @@ SCRIPTS=(
   i3blocks/i3network
   i3blocks/i3separator
   i3blocks/i3volume
+  i3blocks/i3temp
   idea.sh
 )
 

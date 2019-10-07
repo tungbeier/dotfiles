@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#===============================================================================
+#
+#          FILE: i3temp
+#
+#         USAGE: ./i3temp
+#
+#   DESCRIPTION: Print the system temperature for i3blocks.
+#
+#  REQUIREMENTS: awk
+#        AUTHOR: tung beier
+#       CREATED: 07 October 2019 18:20 CEST
+#===============================================================================
+
+set -o errexit  # Exit when a command fails
+                # Use || true if a command is allowed to fail
+set -o pipefail # Exit when a command in a pipeline fails
+
+
+#---  FUNCTION  ----------------------------------------------------------------
+#          NAME: _get_temp_status
+#   DESCRIPTION: Print the current temperature information
+#       RETURNS: The temperature information with its corresponding color
+#-------------------------------------------------------------------------------
+_get_temp_status() {
+  local TEMP=$(cat /sys/devices/virtual/thermal/thermal_zone0/temp | awk '{ print int($1 / 1000) }')
+
+  local COLOR
+  if [[ "$TEMP" -le 45 ]]; then
+    COLOR="green"
+  elif [[ "$TEMP" -le 65 ]]; then
+    COLOR="yellow"
+  else
+    COLOR="red"
+  fi
+
+echo "<span fgcolor='${COLOR}'> ${TEMP}°C</span>"
+}
+
+#---  SCRIPT LOGIC  ------------------------------------------------------------
+echo "$(_get_temp_status)"
+
