@@ -1,0 +1,8 @@
+[submodule "vifmimg"]
+	path = vifmimg
+	url = https://github.com/cirala/vifmimg.git
+	branch = master
+[submodule ".config/dotfiles-submodules/vifmimg"]
+	path = .config/dotfiles-submodules/vifmimg
+	url = https://github.com/cirala/vifmimg.git
+	branch = master
