@@ -21,7 +21,7 @@ interval=once
 
 [thermal]
 command=i3temp
-interval=60
+interval=15
 
 [separator]
 full_text=Separator
