@@ -130,6 +130,7 @@ set tm=500
 " Enable syntax highlighting
 syntax on
 colorscheme onedark
+set termguicolors
 
 " Set encoding
 set encoding=utf-8
