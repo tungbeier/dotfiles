@@ -5,7 +5,7 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
-*.font: Source Code Pro for Powerline:pixelsize=20:antialias=true:autohint=true;
+*.font: JetBrainsMono-Regular:pixelsize=20:antialias=true:autohint=true;
 *.alpha: 0.85
 
 ! special
