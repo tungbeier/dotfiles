@@ -9,7 +9,7 @@ alias ll='ls -vAlhF'
 alias la='ls -vAhF'
 alias ld='ls -vlhF'
 
-alias vi='vim'
+alias vi='nvim'
 alias nv='nvim'
 
 alias L='less'

@@ -11,6 +11,8 @@
 " Plugins Manager
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-clang'
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'jiangmiao/auto-pairs'
@@ -28,7 +30,12 @@ call plug#end()
 " Plugins Settings
     let mapleader=","
 
-    let g:deoplete#enable_at_startup=0
+    let g:deoplete#enable_at_startup=1
+
+    let g:deoplete#sources#clang#libclang_path='/usr/lib/libclang.so'
+    let g:deoplete#sources#clang#clang_header='/usr/lib/clang/'
+    let g:deoplete#sources#clang#sort_algo='priority'
+    let g:deoplete#sources#clang#include_default_arguments='True'
 
     let g:airline_powerline_fonts=1
     let g:airline_theme='onedark'
@@ -168,12 +175,15 @@ function! DeleteTrailingWhiteSpaces()
     %s/\s\+$//ge
     exe "normal `z"
 endfunction
-autocmd BufWrite * :call DeleteTrailingWhiteSpaces()
+autocmd BufWrite *.py, *.c, *.h, *.java, *.go :call DeleteTrailingWhiteSpaces()
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h,*.java match BadWhiteSpace /\s\+$/
+au BufRead,BufNewFile *.py, *.pyw, *.c, *.cpp, *.h, *.java match BadWhiteSpace /\s\+$/
+
+" Close auto completion window
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Write file with higher permission
-command W w !sudo tee "%" > /dev/null
+" command W w !sudo tee "%" > /dev/null
 
 " Fzy
 function! FzyCommand(choice_command, vim_command)
