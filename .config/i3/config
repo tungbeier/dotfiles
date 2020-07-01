@@ -29,7 +29,7 @@ font pango:$font 12
 floating_modifier $mod
 
 # Terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec alacritty
 
 # Kill focused window
 bindsym $mod+Shift+c kill
@@ -116,7 +116,7 @@ bindsym $mod+Shift+plus move container to workspace $workspace_4
 bindsym $mod+Shift+bracketright move container to workspace $workspace_6
 bindsym $mod+Shift+exclam move container to workspace $workspace_8
 
-assign [class="St"] $workspace_0
+assign [class="Alacritty"] $workspace_0
 assign [class="jetbrains-idea"] $workspace_2
 assign [class="Chromium"] $workspace_4
 assign [class="Code"] $workspace_6

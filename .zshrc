@@ -29,7 +29,7 @@ ZSH_THEME=""
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor root line)
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=15"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 
 export RAM_DISK_PATH="$HOME/downloads"
 export BACK_UP_PATH="$HOME/backup"
@@ -84,6 +84,16 @@ fi
 
 if [ -f $HOME/.config/zsh_autocomplete ]; then
     source $HOME/.config/zsh_autocomplete
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/tung/.local/share/google-cloud-sdk/path.zsh.inc' ]; then
+    . '/home/tung/.local/share/google-cloud-sdk/path.zsh.inc';
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/tung/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then
+    . '/home/tung/.local/share/google-cloud-sdk/completion.zsh.inc';
 fi
 
 bindkey -v # vi key binding
