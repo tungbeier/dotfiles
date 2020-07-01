@@ -17,7 +17,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'jiangmiao/auto-pairs'
     Plug 'bronson/vim-trailing-whitespace'
-    " Plug 'sheerun/vim-polyglot'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'fatih/vim-go'
     Plug 'udalov/kotlin-vim'
@@ -25,6 +24,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'airblade/vim-gitgutter'
     Plug 'yggdroot/indentline'
     Plug 'mboughaba/i3config.vim'
+    Plug 'cespare/vim-toml'
 call plug#end()
 
 " Plugins Settings
@@ -81,7 +81,7 @@ call plug#end()
     set tabstop=4
     set softtabstop=4
 
-    au FileType c,cpp,h,css,html,sql,sh,yml,yaml setlocal sw=2 ts=2 sts=2
+    au FileType c,cpp,h,css,html,sql,sh,yml,yaml,toml setlocal sw=2 ts=2 sts=2
 
 " Auto reload file when it is changed outside
     set autoread
