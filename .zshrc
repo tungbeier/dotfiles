@@ -9,14 +9,6 @@
 DEFAULT_USER=`whoami`
 
 CLASSPATH=".:.*:/usr/share/java/*"
-M2_HOME=/opt/maven
-GOPATH=$HOME/go
-GOBIN=$GOPATH/bin
-PATH=$PATH:$M2_HOME/bin:$GOBIN
-export GOBIN
-export GOPATH
-export M2_HOME
-export PATH
 export CLASSPATH
 
 export TERM="xterm-256color"
@@ -41,11 +33,6 @@ HISTFILE="$HOME/.config/zsh/history"
 
 plugins=(gitfast git-extras golang wd zsh-completions zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-export LC_COLLATE=C
 
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
